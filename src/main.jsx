@@ -6,12 +6,19 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
+import Edit from './Edit';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    loader: () => fetch('http://localhost:3000/users')
   },
+  {
+    path: "/edit/:id",
+    element: <Edit></Edit>,
+    loader: ({params}) => fetch(`http://localhost:3000/users/${params.id}`)
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
